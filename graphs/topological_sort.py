@@ -1,6 +1,6 @@
 # BFS based topological sort
-'''
 from collections import deque
+
 def BFS(A, D, N, W, memo):
   deg = [0] * N
   for sup in A.keys():
@@ -27,7 +27,7 @@ def BFS(A, D, N, W, memo):
             break
 
   return memo[W]
-  '''
+
 
 # DFS based topological sort
 from collections import defaultdict
@@ -43,6 +43,8 @@ def DFS(v, A, D, memo):
   
   memo[v] = res
   return memo[v]
+
+# --------------------------------------
 
 T = int(input())
 result = []
