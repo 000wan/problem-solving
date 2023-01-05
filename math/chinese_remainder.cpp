@@ -27,7 +27,11 @@ int* xGCD(int a, int b) {  // extended euclidean
 }
 
 int mult_inverse(int a, int m) {  // multiple inverse (modulo m)
-	return xGCD(a,m)[0] % m;  // mod m
+	int b = xGCD(a,m)[0] % m;
+	if (b < 0) {
+		b = (b + m) % m;
+	}
+	return b;  // mod m
 }
 
 // CRT for coprimes

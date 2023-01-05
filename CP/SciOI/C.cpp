@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <unordered_map>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define SUP 998244353
