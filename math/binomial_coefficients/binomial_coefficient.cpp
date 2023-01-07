@@ -1,3 +1,6 @@
+// Lucas's Theorem
+// Binomial coefficients modulo prime
+
 #include <iostream>
 using namespace std;
 
