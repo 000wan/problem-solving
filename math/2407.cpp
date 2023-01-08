@@ -4,7 +4,7 @@ using namespace std;
 
 class BigNumber {
 	private:
-		static const int MAX_LEN = 10001;
+		static const int MAX_LEN = 30;
 		int digit[MAX_LEN]{ 0 };
 		
 	public:
@@ -67,13 +67,36 @@ void BigNumber::print() {
     }
 }
 
-int main(void) {
-	string A, B;
-	cin >> A >> B;
+void solve(int N, int K) {
+	BigNumber prev[N+1];
 	
-	BigNumber a(A);
-	BigNumber b(B);
-	
-	BigNumber res = BigNumber::add(&a, &b);
-	res.print();
+    for(int i=1; i<=N; i++) {
+        BigNumber next[N+1];
+        next[0].set(1);
+		next[i].set(1);
+        
+        for(int j=1; j<=i-1; j++) {
+            next[j] = BigNumber::add(&prev[j-1], &prev[j]);
+        }
+        
+        for(int j=0; j<=i; j++) {
+            prev[j] = next[j];
+        }
+    }
+    
+    prev[K].print();
 }
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	
+	int N;
+    int K;
+    cin >> N >> K;
+    
+    solve(N, K);
+	
+	return 0;
+}
+
