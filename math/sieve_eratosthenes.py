@@ -32,7 +32,6 @@ P = sieve(SUP)
 ki = list(map(int, input().split()))
 for i in range(N):
     k = ki[i]
-    while P[k] != k:
+    while P[k] != -1:
         print(P[k], end=' ')
         k //= P[k]
-    print(k)
