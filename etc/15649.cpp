@@ -39,6 +39,26 @@ void solve(int n, int N, int l, std::vector<int> v) {
     }
 }
 
+// BOJ 15654
+void solve(std::vector<int> A, int l, std::vector<int> v) {
+    if (l == 0) {
+        for (auto i = v.begin(); i != v.end(); ++i) {
+            std::cout << A[*i] << ' ';
+        }
+        cout << '\n';
+    }
+
+    for (int i = 0; i < A.size(); ++i) {
+        if (find(v.begin(), v.end(), i) != v.end())
+            continue;
+
+        v.push_back(i);
+        solve(A, l-1, v);
+        v.pop_back();
+    }
+}
+
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -47,8 +67,16 @@ int main()
     int N, M;
     cin >> N >> M;
     
+    std::vector<int> A;
+    for (int i = 0; i < N; ++i) {
+        int x;
+        cin >> x;
+        A.push_back(x);
+    }
+    sort(A.begin(), A.end());
+
     std::vector<int> v;
-    solve(1, N, M, v);
+    solve(A, M, v);
 
     return 0;
 }
