@@ -1,8 +1,6 @@
 /* BOJ #7576 BFS */
 
-#include <iostream>
-#include <vector>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Position {
