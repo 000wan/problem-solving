@@ -8,45 +8,41 @@ const int MAX_M = 10;
 int hi[MAX_N], si[MAX_N];
 
 ll dp[MAX_N][MAX_M+1]; 
-int visited[MAX_N][MAX_M+1][2]; // 0: latest index, 1: power sum
+ll weight[MAX_N][MAX_N];
+
+void init(int n) {
+    for (int i = 0; i < n; ++i) {
+        weight[i][i] = si[i];
+        int maxj = i;
+
+        for (int j = i+1; j < n; j++) {
+            if (hi[j] > hi[maxj]) {
+                weight[i][j] = si[j];
+                maxj = j;
+            }
+            else if (hi[j] == hi[maxj]) {
+                weight[i][j] = si[j] + weight[i][maxj];
+                maxj = j;
+            }
+            else
+                weight[i][j] = weight[i][maxj];
+        } 
+    }
+}
 
 ll search(int i, int m) {
-    if (i < 0)
-        return 0;
     if (dp[i][m] != -1)
         return dp[i][m];
-    
-    ll res1 = 0;
-    if (m > 0)
-        res1 = search(i-1, m-1) + si[i];
-    
-    ll res2 = 0;
-    int j;
-    if (i >= m) {
-        res2 = search(i-1, m);
-        j = visited[i-1][m][0];
-        visited[i][m][1] = visited[i-1][m][1];
+    if (m == 1)
+        return weight[0][i];
 
-        if (hi[j] < hi[i]) {
-            res2 += si[i] - visited[i-1][m][1];
-            visited[i][m][1] = si[i];
-            j = i;
-        }
-        else if (hi[j] == hi[i]) {
-            res2 += si[i];
-            visited[i][m][1] += si[i];
-            j = i;
-        }
+    ll res = INT_MIN;
+    for (int k = 1; k <= i; ++k) {
+        res = max(res, search(k-1, m-1) + weight[k][i]);
     }
-    //cout <<i<<' '<<m<<" : "<< res1 << ' ' << res2 << '\n';
-    if (res1 > res2) {
-        visited[i][m][0] = i;
-        visited[i][m][1] = si[i];
-        dp[i][m] = res1;
-    } else {
-        visited[i][m][0] = j;
-        dp[i][m] = res2;
-    }
+    
+    //cout << "dp: "<< i << ' '<< m << " : "<<res << '\n';
+    dp[i][m] = res;
     return dp[i][m];
 }
 
@@ -66,7 +62,8 @@ int main()
         cin >> hi[i] >> si[i];
     }
     
-    cout << search(N-1, M-1);
+    init(N);
+    cout << search(N-1, M);
 
     return 0;
 }
