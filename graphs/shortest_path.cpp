@@ -105,7 +105,7 @@ int main() {
 		cin >> u >> v >> w;
 		adj[u].push_back(make_pair(v, w));
 	}
-/*	
+	
     // dijkstra
 	vector<int> D = dijkstra(K, V, adj);
 	for (int v = 1; v <= V; v++) {
@@ -127,7 +127,6 @@ int main() {
         }
         cout << '\n';
     }
-*/
 
     // bellman-ford
     vector<ll> D = bellman_ford(1, V, adj);
