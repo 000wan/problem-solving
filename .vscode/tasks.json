@@ -1,0 +1,71 @@
+{
+	"version": "2.0.0",
+	"runner": "terminal",
+	"type": "shell",
+	"echoCommand": true,
+	"presentation" : { "reveal": "always" },
+	"tasks": [
+		{
+			"label": "mkdir",
+			"command": "mkdir",
+			"args": [
+				"-p",
+				"${fileDirname}/bin"
+			],
+			"presentation": {
+				"reveal": "never",
+				"showReuseMessage": false,
+			}
+		},
+		{
+			"type": "shell",
+			"label": "compile",
+			"command": "/usr/bin/g++",
+			"args": [
+				"${file}",
+				"-o",
+				"${fileDirname}/bin/${fileBasenameNoExtension}"
+			],
+			"problemMatcher": {
+				"fileLocation": [
+					"relative",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					// The regular expression.
+					//Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"clear": true,
+				"reveal": "never",
+				"showReuseMessage": false,
+			},
+			"dependsOn": ["mkdir"]
+		},
+		{
+			"type": "shell",
+			"label": "execute",
+			"command": "${fileDirname}/bin/${fileBasenameNoExtension}",
+			"presentation": {
+				"echo": true,
+				"showReuseMessage": false,
+			},
+			"dependsOn": ["compile"]
+		},
+		{
+      "label": "Run C++",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+      "dependsOn": ["execute"]
+    }
+	]
+}
