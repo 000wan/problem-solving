@@ -2,15 +2,15 @@
 #define ll long long
 using namespace std;
 const int INF = 1e9;
-
-const int MAX_V = 1e4;
-int a[MAX_V+1], parent[MAX_V+1], height[MAX_V+1];
+const int MAX_V = 1e3;
+vector<pair<double, double>> a;
+int parent[MAX_V+1], height[MAX_V+1];
 
 struct Edge {
     int v1, v2;
-    int weight;
+    double weight;
     
-    Edge (int v1, int v2, int weight)
+    Edge (int v1, int v2, double weight)
         : v1(v1)
         , v2(v2)
         , weight(weight)
@@ -25,19 +25,22 @@ std::vector<Edge> G;
 void union_set(int elem, int asso);
 bool union_find(int v, int w);
 void init(int V) {
+    G.clear();
+    a.emplace_back(0, 0);
     for (int i = 1; i <= V; ++i) { // start from 1
-        a[i] = i; 
-        parent[i] = -1;
+        double x, y;
+        cin >> x >> y;
+        a.emplace_back(x, y);
+        parent[i] = i;
         height[i] = 1;
     }
 }
 
 // Kruskal algorithm: Find MST, Greedy, O(ElogE) 
-int kruskal(int V, int E) {
-    init(V);
+double kruskal(int V) {
     std::priority_queue<Edge> pq (G.begin(), G.end());
     
-    int res = 0;
+    double res = 0;
     int cnt = 0;
     while (!pq.empty()) {
         auto [v1, v2, weight] = pq.top();
@@ -65,9 +68,9 @@ void union_set(int elem, int asso) { // elem -> asso
 
 bool union_find(int v, int w) {
     int i = v, j = w;
-    while (parent[i] != -1)
+    while (parent[i] != i)
         i = parent[i];
-    while (parent[j] != -1)
+    while (parent[j] != j)
         j = parent[j];
 
     if (i != j)
@@ -75,20 +78,38 @@ bool union_find(int v, int w) {
     return (i == j);
 }
 
+double dist(pair<double, double> a, pair<double, double> b) {
+    return sqrt(pow(a.first-b.first, 2) + pow(a.second-b.second, 2));
+}
+
+void solve() {
+    int V, M;
+    cin >> V >> M;
+    init(V);
+    
+    bool visited[V+1][V+1] = {};
+    for (int i = 0; i < M; ++i) {
+        int v, w;
+        cin >> v >> w;
+        G.emplace_back(v, w, 0);
+        visited[v][w] = visited[w][v] = true;
+    }
+    for (int i = 1; i < V; ++i) {
+        for (int j = i+1; j <= V; ++j) {
+            if (!visited[i][j])
+                G.emplace_back(i, j, dist(a[i], a[j]));
+        } 
+    }
+
+    printf("%.2f", kruskal(V));
+}
+
 int main()
 {
-    ios_base::sync_with_stdio(false);
+    //ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int V, E;
-    cin >> V >> E;
-    
-    for (int i = 0; i < E; ++i) {
-        int a, b, c;
-        cin >> a >> b >> c;
-        G.emplace_back(a, b, c);
-    }
-    cout << kruskal(V, E) << '\n';
-    
+    solve();
+
     return 0;
 }
