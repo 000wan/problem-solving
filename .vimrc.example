@@ -33,6 +33,8 @@ set backspace=indent,eol,start
 ca tn tabnew
 inoremap jk <Esc>
 inoremap kj <Esc>
+inoremap JK <Esc>
+inoremap KJ <Esc>
 inoremap <C-h> <C-o>h
 inoremap <C-j> <C-g>j
 inoremap <C-k> <C-g>k
@@ -40,11 +42,15 @@ inoremap <C-l> <C-o>l
 
 inoremap <C-B> <Esc>:NERDTreeToggle<CR>
 nnoremap <C-B> :NERDTreeToggle<CR>
+
 inoremap <C-C> <Esc>ggVGy
 nnoremap <C-C> ggVGy
 nnoremap <C-S> :UltiSnipsEdit<CR>
+
 nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprevious<CR>
+inoremap <S-Right> <Esc>:tabnext<CR>
+inoremap <S-Left> <Esc>:tabprevious<CR>
 " autocmd filetype cpp nnoremap <F5> :!mkdir -p bin <CR> :w <bar> !g++ -std=c++17 -O2 -Wall % -o ./bin/%:r && ./bin/%:r <CR>
 autocmd filetype cpp nnoremap <F5> :w <CR> :!clear; g++ -std=c++17 -O2 -Wall % -o ./a.out && if [ -f a.out ]; then ./a.out; rm a.out; fi <CR>
 autocmd filetype python nnoremap <F5> :w <bar> !python3 % <CR>
@@ -79,9 +85,12 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'neoclide/coc.nvim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+
 Plugin 'preservim/nerdtree'
 Plugin 'jiangmiao/auto-pairs'
+
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sonph/onehalf', { 'rtp': 'vim' }
 " Plugin 'morhetz/gruvbox'
 
@@ -154,9 +163,14 @@ inoremap <silent><expr> <S-Tab>
 
 colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " colorscheme onehalflight
-" let g:airline_theme='onehalfdark'
+" let g:airline_theme='onehalflight'
 
 " let g:gruvbox_contrast_dark="hard"
 " colorscheme gruvbox
