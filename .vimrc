@@ -139,7 +139,7 @@ set guifont=Monospace\ 20
 
 " CoC Vim
 " use <tab> to trigger completion and navigate to the next complete item
-let g:coc_node_path = '/home/phenol/.nvm/versions/node/v18.10.0/bin/node'
+" let g:coc_node_path = '/home/phenol/.nvm/versions/node/v18.10.0/bin/node'
 set pumheight=3
 function! CheckBackspace() abort
     let col = col('.') - 1
