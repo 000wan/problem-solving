@@ -161,7 +161,7 @@ inoremap <silent><expr> <S-Tab>
 " 컬러 스킴 사용
 " colorscheme jellybeans
 
-colorscheme onehalfdark
+silent! colorscheme onehalfdark
 let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
