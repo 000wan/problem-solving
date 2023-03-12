@@ -1,0 +1,4 @@
+{
+  "clangd.disableCompletion": true,
+  "clangd.fallbackFlags": ["-std=c++17"]
+}
