@@ -1,0 +1,11 @@
+version: "3"
+services:
+  app:
+    container_name: "${USERNAME}-ps-prod"
+    image: "000wan/problem-solving-dev"
+    env_file:
+      - "./.env"
+    ports:
+      - "${PORT}:22"
+    expose:
+      - "${PORT}"
