@@ -2,6 +2,7 @@ FROM ubuntu:latest
 RUN apt update && apt install -y openssh-server sudo vim git zsh
 RUN mkdir /var/run/sshd
 ENV TZ=Asia/Seoul
+RUN apt-get install -y language-pack-en && update-locale
 
 # add user
 ARG USERNAME
@@ -35,6 +36,7 @@ RUN apt install -y nodejs
 RUN npm install -g yarn
 
 # setting vim
+RUN apt install vim-gtk3
 USER ${USERNAME}
 RUN mkdir -p ./.vim
 RUN git clone https://github.com/000wan/problem-solving.git
@@ -49,8 +51,14 @@ WORKDIR /home/${USERNAME}
 RUN cp ./problem-solving/coc-settings.json ./.vim
 RUN vim -c 'CocInstall coc-clangd' -c 'qa!'
 RUN vim -c 'CocCommand clangd.install' -c 'qa!'
+RUN vim -c 'CocInstall coc-ultisnips' -c 'qa!'
+
+# oh my zsh
 RUN git clone https://github.com/powerline/fonts.git
 RUN ./fonts/install.sh
+RUN rm -rf ./fonts
+RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN sed -ri 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ./.zshrc
 
 # run
 USER root
