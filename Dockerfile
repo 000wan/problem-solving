@@ -36,7 +36,7 @@ RUN apt install -y nodejs
 RUN npm install -g yarn
 
 # setting vim
-RUN apt install vim-gtk3
+RUN apt install -y vim-gtk3
 USER ${USERNAME}
 RUN mkdir -p ./.vim
 RUN git clone https://github.com/000wan/problem-solving.git
