@@ -1,0 +1,7 @@
+[
+  // 컴파일 & 실행
+  {
+    "key": "ctrl+r",
+    "command": "workbench.action.tasks.build"
+  }
+]

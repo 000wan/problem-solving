@@ -1,0 +1,187 @@
+{
+	// File -> Preferences -> User Snippets
+	// Custom Snippets for CP
+
+	"main": {
+		"prefix": "main",
+		"body": [
+			"#include <bits/stdc++.h>",
+			"#define ll long long",
+			"using namespace std;",
+			"const int INF = 1e9;",
+			"",
+			"int main()",
+			"{",
+			"	ios_base::sync_with_stdio(false);",
+			"	cin.tie(NULL);",
+			"	",
+			"	${0}",
+			"	",
+			"	return 0;",
+			"}"
+		]
+	},
+	"cout": {
+		"prefix": "cout",
+		"body": [
+			"cout << ${1} << '\\n';"
+		]
+	},
+	"cin": {
+		"prefix": "cin",
+		"body": [
+			"cin >> ${1};"
+		]
+	},
+
+	"const": {
+		"prefix": "const",
+		"body": [
+			"const int ${1:MAX_N} = ${2:1e5};"
+		]
+	},
+	"solve": {
+		"prefix": "solve",
+		"body": [
+			"void solve() {",
+			"	${0}",
+			"}"
+		]
+	},
+	"n": {
+		"prefix": "n",
+		"body": [
+			"int ${1:N};",
+			"cin >> $1;",
+			"$0"
+		]
+	},
+	"nm": {
+		"prefix": "nm",
+		"body": [
+			"int ${1:N}, ${2:M};",
+			"cin >> $1 >> $2;",
+			"$0"
+		]
+	},
+	"an": {
+		"prefix": "an",
+		"body": [
+			"int ${1:a}[N];",
+			"for (int i = 0; i < N; ++i) {",
+			"	cin >> $1[i];",
+			"}"
+		]
+	},
+	"t": {
+		"prefix": "t",
+		"body": [
+			"int T;",
+			"cin >> T;",
+			"",
+			"while (T--) {",
+			"	solve();",
+			"}"
+		]
+	},
+	"dx": {
+		"prefix": "dx",
+		"body": [
+			"int dx[4] = {1, 0, -1, 0};",
+			"int dy[4] = {0, 1, 0, -1};",
+			"$0"
+		]
+	},
+	"nx": {
+		"prefix": "nx",
+		"body": [
+			"for (int i = 0; i < 4; ++i) {",
+			"	int nx = x+dx[i], ny = y+dy[i];",
+			"	if (nx < 0 || nx >= N || ny < 0 || ny >= M)",
+			"		continue;",
+			"	",
+			"	$0",
+			"}"
+		]
+	},
+	"pii": {
+		"prefix": "pii",
+		"body": [
+			"#define pii pair<int,int>"
+		]
+	},
+
+	"fora": {
+		"prefix": "fora",
+		"body": [
+			"for (auto& ${2:i} : ${1:a}) {",
+			"	$3",
+			"}"
+		]
+	},
+	"forb": {
+		"prefix": "forb",
+		"body": [
+			"for (int ${2:i} = ${1:N-1}; $2 >= 0; --$2) {",
+			"	$3",
+			"}"
+		]
+	},
+	"for": {
+		"prefix": "for",
+		"body": [
+			"for (int ${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {",
+			"	$0",
+			"}"	
+		]
+	},
+
+	"vector": {
+		"prefix": "vector",
+		"body": [
+			"vector<${1:int}> ${2};"
+		]
+	},
+	"stack": {
+		"prefix": "stack",
+		"body": [
+			"stack<${1:int}> ${2};"
+		]
+	},
+	"queue": {
+		"prefix": "queue",
+		"body": [
+			"queue<${1:int}> ${2};"
+		]
+	},
+	"deque": {
+		"prefix": "deque",
+		"body": [
+			"deque<${1:int}> ${2};"
+		]
+	},
+	"pqueue": {
+		"prefix": "pqueue",
+		"body": [
+			"priority_queue<${1:int}> ${2};"
+		]
+	},
+	"set": {
+		"prefix": "set",
+		"body": [
+			"set<${1:int}> ${2};"
+		]
+	},
+	"map": {
+		"prefix": "map",
+		"body": [
+			"map<${1:Key}, ${2:T}> ${3};"
+		]
+	},
+	"umap": {
+		"prefix": "umap",
+		"body": [
+			"unordered_map<${1:Key}, ${2:T}> ${3};"
+		]
+	}
+}
