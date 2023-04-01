@@ -36,7 +36,8 @@ RUN apt install -y nodejs
 RUN npm install -g yarn
 
 # setting vim
-RUN apt install -y vim-gtk3
+RUN apt install -y neovim
+RUN apt install -y fonts-powerline
 USER ${USERNAME}
 RUN mkdir -p ./.vim
 RUN git clone https://github.com/000wan/problem-solving.git
@@ -54,10 +55,7 @@ RUN vim -c 'CocCommand clangd.install' -c 'qa!'
 RUN vim -c 'CocInstall coc-ultisnips' -c 'qa!'
 
 # oh my zsh
-RUN git clone https://github.com/powerline/fonts.git
-RUN ./fonts/install.sh
-RUN rm -rf ./fonts
-RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 RUN sed -ri 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ./.zshrc
 
 # run
