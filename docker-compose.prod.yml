@@ -5,7 +5,29 @@ services:
     image: "000wan/problem-solving-dev"
     env_file:
       - "./.env"
+    restart: always
     ports:
       - "${PORT}:22"
     expose:
       - "${PORT}"
+    volumes:
+      - phenol-ps-data:${WORKSPACE_DIR}
+  code-server:
+    container_name: "${USERNAME}-ps-code"
+    image: lscr.io/linuxserver/code-server:latest
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "${FRONT_PORT}:8443"
+    environment:
+      TZ: Asia/Seoul
+      PASSWORD: "${PASSWORD}"
+      DEFAULT_WORKSPACE: /config/workspace
+    volumes:
+      - phenol-ps-config:/config
+      - phenol-ps-data:/config/workspace
+
+volumes:
+  phenol-ps-data:
+  phenol-ps-config:
