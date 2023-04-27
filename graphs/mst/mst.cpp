@@ -10,20 +10,14 @@ struct Edge {
     int v1, v2;
     int weight;
     
-    Edge (int v1, int v2, int weight)
-        : v1(v1)
-        , v2(v2)
-        , weight(weight)
-    {}
+    Edge (int v1, int v2, int weight): v1(v1), v2(v2), weight(weight){}
     bool operator < (const Edge& e) const {
         return (weight > e.weight); // max heap -> min heap
     }
 };
 
-std::vector<Edge> G;
-
-void union_set(int elem, int asso);
-bool union_find(int v, int w);
+vector<Edge> G;
+bool union_set(int v, int w);
 void init(int V) {
     G.clear();
     for (int i = 1; i <= V; ++i) { // start from 1
@@ -33,17 +27,16 @@ void init(int V) {
     }
 }
 
-// Kruskal algorithm: Find MST, Greedy, O(ElogE) 
+// Kruskal algorithm: Find MST, Greedy, O(ElogV) 
 int kruskal(int V, int E) {
-    std::priority_queue<Edge> pq (G.begin(), G.end());
+    priority_queue<Edge> pq (G.begin(), G.end());
     
-    int res = 0;
-    int cnt = 0;
+    int res = 0, cnt = 0;
     while (!pq.empty()) {
         auto [v1, v2, weight] = pq.top();
         pq.pop();
 
-        if (!union_find(v1, v2)) { // exclude cycle
+        if (!union_set(v1, v2)) { // exclude cycle
             res += weight;
             cnt ++;
         }
@@ -53,25 +46,27 @@ int kruskal(int V, int E) {
     return INF; // MST doesn't exist
 }
 
-// Union & Find
-void union_set(int elem, int asso) { // elem -> asso
-    if (height[elem] == height[asso])
-        height[asso]++;
-    else if (height[elem] > height[asso])
-        swap(elem, asso);
-
-    parent[elem] = asso;
+// Union & Find data structure
+// union by rank
+void union_link(int v, int w) {
+    if (v == w) return;
+    if (height[v] > height[w])
+        swap(v, w);
+    parent[v] = w;
+    if (height[v] == height[w])
+        height[w]++;
 }
 
-bool union_find(int v, int w) {
-    int i = v, j = w;
-    while (parent[i] != i)
-        i = parent[i];
-    while (parent[j] != j)
-        j = parent[j];
+// path compression
+int union_find(int v) {
+    if (v != parent[v])
+        parent[v] = union_find(parent[v]);
+    return parent[v];
+}
 
-    if (i != j)
-        union_set(i, j);
+bool union_set(int v, int w) {
+    int i = union_find(v), j = union_find(w);
+    union_link(i, j);
     return (i == j);
 }
 

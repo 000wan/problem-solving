@@ -6,37 +6,38 @@ using namespace std;
 #define FIND 1
 #define UNION 0
 
-const int MAX_N = 1e6;
-int N;
+const int MAX_N = 1e6+1;
 int a[MAX_N], parent[MAX_N], height[MAX_N];
 
 void init(int n) {
-    N = n+1;
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i <= n; ++i) {
         a[i] = i;
         parent[i] = i;
         height[i] = 1;
     }
 }
 
-void union_set(int elem, int asso) { // elem -> asso
-    if (height[elem] == height[asso])
-        height[asso]++;
-    else if (height[elem] > height[asso])
-        swap(elem, asso);
-
-    parent[elem] = asso;
+// union by rank
+void union_link(int v, int w) {
+    if (v == w) return;
+    if (height[v] > height[w])
+        swap(v, w);
+    parent[v] = w;
+    if (height[v] == height[w])
+        height[w]++;
 }
 
-bool union_find(int v, int w, int MOD) {
-    int i = v, j = w;
-    while (parent[i] != i)
-        i = parent[i];
-    while (parent[j] != j)
-        j = parent[j];
+// path compression
+int union_find(int v) {
+    if (v != parent[v])
+        parent[v] = union_find(parent[v]);
+    return parent[v];
+}
 
-    if (MOD == UNION && i != j)
-        union_set(i, j);
+bool union_set(int v, int w, int MOD) {
+    int i = union_find(v), j = union_find(w);
+    if (MOD == UNION)
+        union_link(i, j);
     return (i == j);
 }
 
@@ -52,12 +53,9 @@ int main()
     while (M--) {
         int MOD, a, b;
         cin >> MOD >> a >> b;
-        bool res = union_find(a, b, MOD);
+        bool res = union_set(a, b, MOD);
         if (MOD == FIND) {
-            if (res)
-                cout << "YES" << '\n';
-            else
-                cout << "NO" << '\n';
+            cout << (res ? "YES" : "NO") << '\n';
         }
     }
 
