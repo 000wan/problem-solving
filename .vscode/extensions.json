@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd"
+  ]
+  /* clangd settings */
+  /*
+  "clangd.arguments": [
+    "--header-insertion=never"
+  ],
+  "clangd.fallbackFlags": [
+    "-std=c++17"
+  ]
+  */
+}
