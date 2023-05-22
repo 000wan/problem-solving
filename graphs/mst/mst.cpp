@@ -46,6 +46,30 @@ int kruskal(int V, int E) {
     return INF; // MST doesn't exist
 }
 
+// Prim's algorithm: Greedy, O(ElogV) same as the Kruskal
+vector<pair<int,int>> adj[MAX_V+1];
+bool visited[MAX_V+1]; 
+int prim(int V, int s) {
+    priority_queue<pair<int,int>> pq;
+    pq.emplace(0, s);
+
+    int res = 0, cnt = 0;
+    while (!pq.empty()) {
+        auto [c, u] = pq.top(); pq.pop();
+        if (!visited[u]) {
+            visited[u] = 1;
+            res += -c; cnt++;
+            for (auto& [v, w] : adj[u]) {
+                if (!visited[v])
+                    pq.emplace(-w, v);
+            }
+        }
+    }
+
+    if (cnt == V) return res;
+    else return INF;
+}
+
 // Union & Find data structure
 // union by rank
 void union_link(int v, int w) {
@@ -78,6 +102,7 @@ int main()
     int V, E;
     cin >> V >> E;
     
+    // kruskal
     init(V);
     for (int i = 0; i < E; ++i) {
         int a, b, c;
@@ -86,5 +111,14 @@ int main()
     }
     cout << kruskal(V, E) << '\n';
     
+    // prim
+    for (int i = 0; i < E; ++i) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        adj[u].emplace_back(v, w);
+        adj[v].emplace_back(u, w);
+    }
+    cout << prim(V, 1) << '\n';
+
     return 0;
 }
