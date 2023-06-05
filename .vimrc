@@ -39,6 +39,10 @@ inoremap <C-h> <C-o>h
 inoremap <C-j> <C-g>j
 inoremap <C-k> <C-g>k
 inoremap <C-l> <C-o>l
+nnoremap <S-Right> $
+nnoremap <S-Left> ^
+nmap <S-L> <S-Right>
+nmap <S-H> <S-Left>
 
 inoremap <C-B> <Esc>:NERDTreeToggle<CR>
 nnoremap <C-B> :NERDTreeToggle<CR>

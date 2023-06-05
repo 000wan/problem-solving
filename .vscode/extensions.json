@@ -3,12 +3,73 @@
     "llvm-vs-code-extensions.vscode-clangd"
   ]
   /* clangd settings */
-  /*
-  "clangd.arguments": [
-    "--header-insertion=never"
-  ],
-  "clangd.fallbackFlags": [
-    "-std=c++17"
-  ]
-  */
+  // "clangd.arguments": [
+  //   "--header-insertion=never"
+  // ],
+  // "clangd.fallbackFlags": [
+  //   "-std=c++17"
+  // ]
+  /* vim settings */
+  // "vim.vimrc.enable": true,
+  // "vim.useSystemClipboard": true,
+  // "vim.insertModeKeyBindingsNonRecursive": [
+  //     {
+  //         "before": ["j", "k"],
+  //         "after": ["<Esc>"]
+  //     },
+  //     {
+  //         "before": ["k", "j"],
+  //         "after": ["<Esc>"]
+  //     },
+  //     {
+  //         "before": ["J", "K"],
+  //         "after": ["<Esc>"]
+  //     },
+  //     {
+  //         "before": ["K", "J"],
+  //         "after": ["<Esc>"]
+  //     },
+  //     {
+  //         "before": ["<C-h>"],
+  //         "after": ["<C-o>", "h"]
+  //     },
+  //     {
+  //         "before": ["<C-j>"],
+  //         "after": ["<C-o>", "j"]
+  //     },
+  //     {
+  //         "before": ["<C-k>"],
+  //         "after": ["<C-o>", "k"]
+  //     },
+  //     {
+  //         "before": ["<C-l>"],
+  //         "after": ["<C-o>", "l"]
+  //     },
+  //     {
+  //         "before": ["<C-C>"],
+  //         "after": ["<Esc>", "g", "g", "V", "G", "y"]
+  //     },
+  // ],
+  // "vim.normalModeKeyBindingsNonRecursive": [
+  //     {
+  //         "before": ["<S-Right>"],
+  //         "after": ["$"]
+  //     },
+  //     {
+  //         "before": ["<S-Left>"],
+  //         "after": ["^"]
+  //     },
+  //     {
+  //         "before": ["<S-l>"],
+  //         "after": ["$"]
+  //     },
+  //     {
+  //         "before": ["<S-h>"],
+  //         "after": ["^"]
+  //     },
+  //     {
+  //         "before": ["<C-C>"],
+  //         "after": ["g", "g", "V", "G", "y"]
+  //     },
+  // ],
 }
