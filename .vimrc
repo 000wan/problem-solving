@@ -43,6 +43,8 @@ nnoremap <S-Right> $
 nnoremap <S-Left> ^
 nmap <S-L> <S-Right>
 nmap <S-H> <S-Left>
+nnoremap <C-k> <C-y>
+nnoremap <C-j> <C-e>
 
 inoremap <C-B> <Esc>:NERDTreeToggle<CR>
 nnoremap <C-B> :NERDTreeToggle<CR>
