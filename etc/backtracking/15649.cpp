@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
+#define all(x) (x).begin(),(x).end()
 
 // BOJ 15649
 void solve(int N, int l, std::vector<int> v) {
@@ -9,6 +10,7 @@ void solve(int N, int l, std::vector<int> v) {
             std::cout << *i << ' ';
         }
         cout << '\n';
+        return;
     }
 
     for (int i = 1; i <= N; ++i) {
@@ -28,6 +30,7 @@ void solve(int n, int N, int l, std::vector<int> v) {
             std::cout << *i << ' ';
         }
         cout << '\n';
+        return;
     }
     if (n > N)
         return;
@@ -46,6 +49,7 @@ void solve(std::vector<int> A, int l, std::vector<int> v) {
             std::cout << A[*i] << ' ';
         }
         cout << '\n';
+        return;
     }
 
     for (int i = 0; i < A.size(); ++i) {
@@ -58,6 +62,28 @@ void solve(std::vector<int> A, int l, std::vector<int> v) {
     }
 }
 
+// BOJ 15663
+void solve(int N, int l, vector<int>& v, vector<int>& A) {
+    if (l == 0) {
+        for (auto i = v.begin(); i != v.end(); ++i) {
+            std::cout << A[*i] << ' ';
+        }
+        cout << '\n';
+        return;
+    }
+
+    int prev = -1;
+    for (int i = 0; i < N; ++i) {
+        if (find(v.begin(), v.end(), i) != v.end())
+            continue;
+        if (A[i] == prev) continue;
+
+        v.push_back(i);
+        solve(N, l-1, v, A);
+        v.pop_back();
+        prev = A[i];
+    }
+}
 
 int main()
 {
@@ -73,10 +99,10 @@ int main()
         cin >> x;
         A.push_back(x);
     }
-    sort(A.begin(), A.end());
+    sort(all(A));
 
     std::vector<int> v;
-    solve(A, M, v);
+    solve(A.size(), M, v, A);
 
     return 0;
 }
