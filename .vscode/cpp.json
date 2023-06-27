@@ -20,6 +20,33 @@
 			"}"
 		]
 	},
+	"tmain": {
+		"prefix": "tmain",
+		"body": [
+		  "#include <bits/stdc++.h>",
+		  "#define ll long long",
+		  "using namespace std;",
+		  "const int INF = 1e9;",
+		  "",
+		  "void solve() {",
+		  "    ",
+		  "}",
+		  "",
+		  "int main()",
+		  "{",
+		  "    cin.tie(0)->sync_with_stdio(0);",
+		  "    ",
+		  "    int T;",
+		  "    cin >> T;",
+		  "    ",
+		  "    while (T--) {",
+		  "        solve();",
+		  "    }",
+		  "    ",
+		  "    return 0;",
+		  "}"
+		]
+	},
 	"cout": {
 		"prefix": "cout",
 		"body": [
@@ -71,6 +98,15 @@
 			"	cin >> $1[i];",
 			"}"
 		]
+	},
+	"ann": {
+		"prefix": "ann",
+		"body": [
+			"vector<int> ${1:a}(N);",
+			"for (auto& x : $1) {",
+			"	cin >> x;",
+			"}"
+		],
 	},
 	"t": {
 		"prefix": "t",
