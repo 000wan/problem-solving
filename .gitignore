@@ -1,5 +1,6 @@
 CP
 bin/
+.library
 *.exe
 *.sh
 *.out
